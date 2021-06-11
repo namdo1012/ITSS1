@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "email": "admin@gmail.com",
+      "password": "1234",
+      "repass": "1234",
+      "nick": "nnm",
+      "id": "j-9nAC3A"
+    },
+    {
+      "email": "admin1@gmail.com",
+      "password": "321",
+      "repass": "321",
+      "nick": "mmn",
+      "id": "b1bCtttD"
+    }
+  ]
+}

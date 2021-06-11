@@ -1,0 +1,10 @@
+body {
+    background-image: url('bg-img.jpg');
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 550px;
+}
