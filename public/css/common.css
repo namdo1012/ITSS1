@@ -3,12 +3,12 @@ body {
     url("../bg-img.jpg");
 }
 
-.game-info {
+/* .game-info {
   position: absolute;
   top: 11vh;
   left: 50%;
   transform: translateX(-50%);
-}
+} */
 
 .game-title {
   font-size: 50px;
@@ -17,4 +17,26 @@ body {
 
 .game-player {
   margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.game-score {
+  font-weight: bold;
+}
+
+.board-container {
+  width: 50vw;
+  /* height: 350px; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.board-table {
+  margin-top: 20px;
 }
