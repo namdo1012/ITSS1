@@ -147,7 +147,11 @@ app.post("/users/signIn", function (req, res) {
 });
 
 app.get("/play", function (req, res) {
-  res.render("game/play");
+  const user = {
+    name: "Nam Do",
+  };
+
+  res.render("game/play", { ...user });
 });
 
 app.listen(port, function () {
