@@ -32,14 +32,11 @@ app.use(bodyParser.json());
 
 app.set("view engine", "pug");
 app.set("views", "./views");
+app.locals.basedir = "./views/components";
 
 app.get("/", function (req, res) {
   res.render("index");
 });
-
-// app.get('/test', function(req, res) {
-// 	res.render('user/logIn');
-// });
 
 app.get("/users/signUp", function (req, res) {
   res.render("user/create");
@@ -47,7 +44,6 @@ app.get("/users/signUp", function (req, res) {
 
 app.post("/users/signUp", function (req, res) {
   req.body.id = nanoid(idLength);
-  // console.log(req.body);
   let errors = [];
   if (!req.body.email) {
     errors.push("Email is required");
@@ -72,8 +68,6 @@ app.post("/users/signUp", function (req, res) {
     });
     return;
   }
-
-  // console.log('bas');
 
   if (req.body.password === req.body.repass) {
     db.data.users.push(req.body);
@@ -138,10 +132,12 @@ app.post("/users/signIn", function (req, res) {
       });
       return;
     } else {
+      res.render("index");
+
       // found user
-      res.send(
-        '<script>alert("Log In successfully !"); window.location.href = "/users/signIn";</script>'
-      );
+      // res.send(
+      //   '<script>alert("Log In successfully !"); window.location.href = "/users/signIn";</script>'
+      // );
     }
   }
 });
@@ -160,6 +156,10 @@ app.get("/leaderboard", (req, res) => {
 
 app.get("/update-user-info", (req, res) => {
   res.render("user/update-user");
+});
+
+app.get("/play-history", (req, res) => {
+  res.render("user/play-history");
 });
 
 app.listen(port, function () {
