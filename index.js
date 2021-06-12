@@ -154,6 +154,14 @@ app.get("/play", function (req, res) {
   res.render("game/play", { ...user });
 });
 
+app.get("/leaderboard", (req, res) => {
+  res.render("game/leaderboard");
+});
+
+app.get("/update-user-info", (req, res) => {
+  res.render("user/update-user");
+});
+
 app.listen(port, function () {
   console.log("Server listening on port " + port);
 });
