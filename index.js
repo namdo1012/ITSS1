@@ -26,6 +26,7 @@ let port = 3000;
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(cookieParser());
 
 // parse application/json
 app.use(bodyParser.json());
@@ -34,11 +35,32 @@ app.set("view engine", "pug");
 app.set("views", "./views");
 app.locals.basedir = "./views/components";
 
+function auth(req, res, next) {
+	if(!req.cookies.userId) {
+		res.redirect('/users/signIn');
+		return;
+	}
+
+	let user = db.data.users.find(function (user) {
+    return user.id === req.cookies.userId;
+  });
+
+  if(!user) {
+  	res.redirect('/users/signIn');
+		return;
+  }
+
+  next();
+}
+
 app.get("/", function (req, res) {
   res.render("index");
 });
 
 app.get("/users/signUp", function (req, res) {
+	if(req.cookies.userId) {
+		res.clearCookie("userId");
+	}
   res.render("user/create");
 });
 
@@ -86,6 +108,9 @@ app.post("/users/signUp", function (req, res) {
 });
 
 app.get("/users/signIn", function (req, res) {
+	if(req.cookies.userId) {
+		res.clearCookie("userId");
+	}
   res.render("user/signIn");
 });
 
@@ -132,17 +157,13 @@ app.post("/users/signIn", function (req, res) {
       });
       return;
     } else {
+    	res.cookie('userId', user.id);
       res.render("index");
-
-      // found user
-      // res.send(
-      //   '<script>alert("Log In successfully !"); window.location.href = "/users/signIn";</script>'
-      // );
     }
   }
 });
 
-app.get("/play", function (req, res) {
+app.get("/play", auth, function (req, res) {
   const user = {
     name: "Nam Do",
   };
@@ -150,15 +171,15 @@ app.get("/play", function (req, res) {
   res.render("game/play", { ...user });
 });
 
-app.get("/leaderboard", (req, res) => {
+app.get("/leaderboard", auth, (req, res) => {
   res.render("game/leaderboard");
 });
 
-app.get("/update-user-info", (req, res) => {
+app.get("/update-user-info", auth, (req, res) => {
   res.render("user/update-user");
 });
 
-app.get("/play-history", (req, res) => {
+app.get("/play-history", auth, (req, res) => {
   res.render("user/play-history");
 });
 
