@@ -6,9 +6,40 @@
       "repass": "12345",
       "nick": "Ngoc Mung",
       "id": "SpXtgNK6"
+    },
+    {
+      "email": "admin2@gmail.com",
+      "password": "321",
+      "repass": "321",
+      "nick": "Nam Do",
+      "id": "IM5PyKEA"
     }
   ],
   "records": [
+    {
+      "score": "140",
+      "savedName": "namdo",
+      "date": "6/13/2021, 6:29:15 PM",
+      "userId": "IM5PyKEA"
+    },
+    {
+      "score": "80",
+      "savedName": "namdo2",
+      "date": "6/13/2021, 6:31:09 PM",
+      "userId": "IM5PyKEA"
+    },
+    {
+      "score": "70",
+      "savedName": "aaa",
+      "date": "6/13/2021, 5:57:45 PM",
+      "userId": "SpXtgNK6"
+    },
+    {
+      "score": "70",
+      "savedName": "zzz",
+      "date": "6/13/2021, 6:32:35 PM",
+      "userId": "IM5PyKEA"
+    },
     {
       "score": "40",
       "savedName": "ngocmunghy",
@@ -16,10 +47,10 @@
       "userId": "SpXtgNK6"
     },
     {
-      "score": "70",
-      "savedName": "aaa",
-      "date": "6/13/2021, 5:57:45 PM",
-      "userId": "SpXtgNK6"
+      "score": "10",
+      "savedName": "test user",
+      "date": "6/13/2021, 6:33:10 PM",
+      "userId": "IM5PyKEA"
     }
   ]
 }

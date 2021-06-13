@@ -177,7 +177,7 @@ app.post("/users/signIn", function (req, res) {
 
 app.get("/play", auth, function (req, res) {
   let user = db.data.users.find(function(user) {
-    return user.id = req.cookies.userId;
+    return user.id === req.cookies.userId;
   });
 
   // const user = {
@@ -189,8 +189,17 @@ app.get("/play", auth, function (req, res) {
   });
 });
 
+function compare(a, b) {
+  return b.score - a.score;
+}
+
 app.get("/leaderboard", auth, (req, res) => {
-  res.render("game/leaderboard");
+  let results = db.data.records;
+  results.sort(compare);
+  res.render("game/leaderboard", {
+    results: results,
+    length: results.length > 5 ? 5 : results.length
+  });
 });
 
 app.get("/update-user-info", auth, (req, res) => {

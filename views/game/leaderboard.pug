@@ -17,17 +17,10 @@ body
         tr
           th(scope='col') #
           th(scope='col') Username
-          th(scope='col') Max Score
+          th(scope='col') Score
       tbody
-        tr
-          th(scope='row') 1
-          td Mark
-          td 100000
-        tr
-          th(scope='row') 2
-          td Jacob
-          td 2345
-        tr
-          th(scope='row') 3
-          td Larry
-          td 1
+        - for(let i = 0; i < length; i++) 
+          tr
+          th(scope='row') #{i + 1}
+          td #{results[i].savedName}
+          td #{results[i].score}
