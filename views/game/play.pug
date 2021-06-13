@@ -21,7 +21,7 @@ body
       | Score : 
       #score 0
     //- button#save-game-btn.btn.btn-primary(data-bs-toggle="modal", data-bs-target="#exampleModal") Save score
-    button#save-game-btn.btn.btn-primary(type='button', data-bs-toggle='modal', data-bs-target='#exampleModal') Save
+    button#save-game-btn.btn.btn-primary(type='button', data-bs-toggle='modal', data-bs-target='#exampleModal', onclick='handleShowModal()') Save
   #exampleModal.modal.fade(tabindex='-1', aria-labelledby='exampleModalLabel', aria-hidden='true')
     .modal-dialog
       .modal-content
@@ -32,7 +32,7 @@ body
           form
             .mb-3
               label.col-form-label(for='name') Saved name:
-              input#name.form-control(type='text')
+              input#saved-name.form-control(type='text')
             .mb-3
               label.col-form-label(for='score1') Score:
               input#score1.form-control(type='text', readonly='')
@@ -44,4 +44,4 @@ body
   script(src='/js/tetrominoes.js')
   script(src='/js/tetris.js')
   script(src='/js/play.js')
-  script(src='/js/save.js')
+  //- script(src='/js/save.js')
