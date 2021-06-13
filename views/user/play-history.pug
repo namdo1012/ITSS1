@@ -20,18 +20,9 @@ body
           th(scope='col') Score
           th(scope='col') Saved name
       tbody
-        tr
-          th(scope='row') 1
-          td 10/10/2021 10:21
-          td 100000
-          td concac
-        tr
-          th(scope='row') 2
-          td 10/10/2021 10:21
-          td 100000
-          td concac
-        tr
-          th(scope='row') 3
-          td 10/10/2021 10:21
-          td 100000
-          td concac
+        - for(let i = 0; i < length; i++) 
+          tr
+          th(scope='row') #{i + 1}
+          td #{results[i].date}
+          td #{results[i].score}
+          td #{results[i].savedName}

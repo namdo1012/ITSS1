@@ -198,7 +198,13 @@ app.get("/update-user-info", auth, (req, res) => {
 });
 
 app.get("/play-history", auth, (req, res) => {
-  res.render("user/play-history");
+  let results = db.data.records.filter(function(record) {
+    return record.userId === req.cookies.userId;
+  });
+  res.render("user/play-history", {
+    results: results,
+    length: results.length
+  });
 });
 
 app.listen(port, function () {
