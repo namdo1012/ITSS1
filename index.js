@@ -18,6 +18,7 @@ db.read();
 
 if (!db.data) {
   db.data = { users: [] };
+  db.data.records = [];
   db.write();
 }
 
@@ -55,7 +56,13 @@ function auth(req, res, next) {
 
 app.post("/save-game", function (req, res) {
   const score = req.body.score;
-  console.log(req.body);
+  let date = new Date().toLocaleString();
+  req.body.date = date;
+  req.body.userId = req.cookies.userId;
+  // console.log(req.body);
+
+  db.data.records.push(req.body);
+  db.write();
 });
 
 app.get("/", function (req, res) {
@@ -169,11 +176,17 @@ app.post("/users/signIn", function (req, res) {
 });
 
 app.get("/play", auth, function (req, res) {
-  const user = {
-    name: "Nam Do",
-  };
+  let user = db.data.users.find(function(user) {
+    return user.id = req.cookies.userId;
+  });
 
-  res.render("game/play", { ...user });
+  // const user = {
+  //   name: "Nam Do",
+  // };
+
+  res.render("game/play", {
+    name: user.nick
+  });
 });
 
 app.get("/leaderboard", auth, (req, res) => {
