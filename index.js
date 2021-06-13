@@ -206,6 +206,63 @@ app.get("/update-user-info", auth, (req, res) => {
   res.render("user/update-user");
 });
 
+app.post("/update-user-info", function(req, res) {
+
+  let errors = [];
+  let email = req.body.email;
+  let password = req.body.password;
+  let repass = req.body.repass;
+  let nick = req.body.nick;
+
+  if (!email) {
+    errors.push("Email is required");
+  }
+
+  if (!password) {
+    errors.push("Password is required");
+  }
+
+  if(!repass) {
+    errors.push("Re-pass is required");
+  }
+
+  if(!nick) {
+    errors.push("Nickname is required");
+  }
+
+  if (errors.length) {
+    res.render("user/update-user", {
+      errors: errors,
+      values: req.body,
+    });
+    return;
+  }
+
+  if(password !== repass) {
+    errors.push("Wrong password");
+    res.render("user/update-user", {
+      errors: errors,
+      values: req.body,
+    });
+    return;
+  }
+
+  let user = db.data.users.find(function(user) {
+    return user.id === req.cookies.userId;
+  });
+
+  user.email = email;
+  user.password = password;
+  user.repass = repass;
+  user.nick = nick;
+  db.write();
+
+  res.send(
+    '<script>alert("Update user successfully !"); window.location.href = "/";</script>'
+  );
+
+});
+
 app.get("/play-history", auth, (req, res) => {
   let results = db.data.records.filter(function(record) {
     return record.userId === req.cookies.userId;
