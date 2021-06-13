@@ -36,31 +36,36 @@ app.set("views", "./views");
 app.locals.basedir = "./views/components";
 
 function auth(req, res, next) {
-	if(!req.cookies.userId) {
-		res.redirect('/users/signIn');
-		return;
-	}
+  if (!req.cookies.userId) {
+    res.redirect("/users/signIn");
+    return;
+  }
 
-	let user = db.data.users.find(function (user) {
+  let user = db.data.users.find(function (user) {
     return user.id === req.cookies.userId;
   });
 
-  if(!user) {
-  	res.redirect('/users/signIn');
-		return;
+  if (!user) {
+    res.redirect("/users/signIn");
+    return;
   }
 
   next();
 }
+
+app.post("/save-game", function (req, res) {
+  const score = req.body.score;
+  console.log(req.body);
+});
 
 app.get("/", function (req, res) {
   res.render("index");
 });
 
 app.get("/users/signUp", function (req, res) {
-	if(req.cookies.userId) {
-		res.clearCookie("userId");
-	}
+  if (req.cookies.userId) {
+    res.clearCookie("userId");
+  }
   res.render("user/create");
 });
 
@@ -108,9 +113,9 @@ app.post("/users/signUp", function (req, res) {
 });
 
 app.get("/users/signIn", function (req, res) {
-	if(req.cookies.userId) {
-		res.clearCookie("userId");
-	}
+  if (req.cookies.userId) {
+    res.clearCookie("userId");
+  }
   res.render("user/signIn");
 });
 
@@ -157,7 +162,7 @@ app.post("/users/signIn", function (req, res) {
       });
       return;
     } else {
-    	res.cookie('userId', user.id);
+      res.cookie("userId", user.id);
       res.render("index");
     }
   }

@@ -7,6 +7,10 @@ const COL = (COLUMN = 10);
 const SQ = (squareSize = 20);
 const VACANT = "WHITE"; // color of an empty square
 
+// Disable save button when start game
+const saveBtn = document.getElementById("save-game-btn");
+saveBtn.disabled = true;
+
 // draw a square
 function drawSquare(x, y, color) {
   ctx.fillStyle = color;
@@ -165,11 +169,18 @@ Piece.prototype.lock = function () {
       }
       // pieces to lock on top = game over
       if (this.y + r < 0) {
-        alert("Game Over");
         // stop request animation frame
         gameOver = true;
         break;
       }
+      if (gameOver) {
+        alert("Game Over");
+
+        // Enable save game button
+        saveBtn.disabled = false;
+        break;
+      }
+
       // we lock the piece
       board[this.y + r][this.x + c] = this.color;
     }
