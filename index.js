@@ -273,6 +273,18 @@ app.get("/play-history", auth, (req, res) => {
   });
 });
 
+app.get("/user-info", auth, (req, res) => {
+  let user = db.data.users.find(function(user) {
+    return user.id === req.cookies.userId;
+  });
+
+  res.render("user/info", {
+    email: user.email,
+    password: user.password,
+    nick: user.nick
+  });
+});
+
 app.listen(port, function () {
   console.log("Server listening on port " + port);
 });
