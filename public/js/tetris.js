@@ -171,14 +171,11 @@ Piece.prototype.lock = function () {
       if (this.y + r < 0) {
         // stop request animation frame
         gameOver = true;
-        break;
-      }
-      if (gameOver) {
         alert("Game Over");
 
         // Enable save game button
         saveBtn.disabled = false;
-        break;
+        return;
       }
 
       // we lock the piece
